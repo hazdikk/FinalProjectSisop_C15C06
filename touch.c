@@ -11,5 +11,12 @@ int main (int argc, char* argv[])
 	for (a=1;a<argc;a++)
 	{
 		file = open(argv[a], 0_CREATE);
+		if (file < 0)
+		{
+			printf(1, "Error dalam membuat file\n");
+			exit();
+		}
+		close(file);
 	}
+	exit;
 }
