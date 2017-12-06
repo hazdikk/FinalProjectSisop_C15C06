@@ -10,7 +10,7 @@ int main (int argc, char* argv[])
 	int a, file;
 	for (a=1;a<argc;a++)
 	{
-		file = open(argv[a], 0_CREATE);
+		file = open(argv[a], O_CREATE);
 		if (file < 0)
 		{
 			printf(1, "Error dalam membuat file\n");
@@ -18,5 +18,5 @@ int main (int argc, char* argv[])
 		}
 		close(file);
 	}
-	exit;
+	exit();
 }
