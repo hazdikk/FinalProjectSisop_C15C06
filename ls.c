@@ -8,12 +8,12 @@ char* fmtname(char *path)
   static char buf[DIRSIZ+1];
   char *p;
   
-  // Find first character after last slash.
+  // 1
   for(p= path+strlen(path) ; p >= path && *p != '/'; p--)
     ;
   p++;
   
-  // Return blank-padded name.
+  // 2
   if(strlen(p) >= DIRSIZ)
     return p;
   memmove(buf, p, strlen(p));
@@ -28,12 +28,14 @@ void ls(char *path)
   struct dirent de;
   struct stat st;
   
-  if((fd = open(path,0)) < 0){
+  if((fd = open(path,0)) < 0)
+  {
     printf(2, "ls: cannot open %s\n", path);
     return;
   }
   
-  if(fstat(fd, &st) < 0){
+  if(fstat(fd, &st) < 0)
+  {
     printf(2, "ls: cannot stat %s\n", path);
     close(fd);
     return;
@@ -75,11 +77,11 @@ int main(int argc, char *argv[])
 {
   int i;
 
-  if(argc < 2){
+  if(argc < 2)
+  {
     ls(".");
     exit();
   }
-  for(i=1; i<argc; i++)
-    ls(argv[i]);
+  for(i=1; i<argc; i++) ls(argv[i]);
   exit();
 }
