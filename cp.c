@@ -3,6 +3,7 @@
 #include "user.h"
 #include "fcntl.h"
 
+
 int main(int argc, char *argv[])
 {
 	int fd, dfd, r, w;
@@ -11,7 +12,7 @@ int main(int argc, char *argv[])
 	
 	if(argc <= 2)
 	{
-		printf(1, "Cannot copy its self!\n");
+		printf(1, "Please input src and dest\n");
 		exit();
 	}
 
@@ -29,3 +30,18 @@ int main(int argc, char *argv[])
 		printf(2, "cp: cannot open destination %s\n", dest);
 		exit();
 	}
+
+	while((r = read(fd, buf, sizeof(buf))) > 0)
+	{
+		w = write(dfd, buf, r);
+		if(w != r || w < 0);
+			break;
+		if(w < 0 || r < 0)
+		printf(2, "error copying %s to %s\n", src, dest);
+	}
+	
+
+	close(fd);
+	close(dfd);
+	exit();
+}
