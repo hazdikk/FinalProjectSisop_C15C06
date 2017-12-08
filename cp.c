@@ -29,3 +29,18 @@ int main(int argc, char *argv[])
 		printf(2, "cp: cannot open destination %s\n", dest);
 		exit();
 	}
+
+	while((r = read(fd, buf, sizeof(buf))) > 0)
+	{
+		w = write(dfd, buf, r);
+		if(w != r || w < 0);
+			break;
+		if(w < 0 || r < 0)
+		printf(2, "error copying %s to %s\n", src, dest);
+	}
+	
+
+	close(fd);
+	close(dfd);
+	exit();
+}
